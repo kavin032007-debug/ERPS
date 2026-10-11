@@ -1,5 +1,6 @@
 package com.erps.security;
 
+import com.erps.view.LoginView;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,8 @@ public class SecurityConfig extends VaadinWebSecurity {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
+                .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/login/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/verify")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/verify/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/images/**")).permitAll()
@@ -34,7 +37,7 @@ public class SecurityConfig extends VaadinWebSecurity {
         // Allow H2 console frames in development
         http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
 
-        setLoginView(http, com.erps.view.LoginView.class);
         super.configure(http);
+        setLoginView(http, LoginView.class);
     }
 }
