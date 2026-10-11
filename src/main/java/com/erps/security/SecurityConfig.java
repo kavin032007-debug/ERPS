@@ -34,7 +34,7 @@ public class SecurityConfig extends VaadinWebSecurity {
         // Allow H2 console frames in development
         http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
 
-        super.configure(http);
         setLoginView(http, com.erps.view.LoginView.class);
+        super.configure(http);
     }
 }
