@@ -1,15 +1,22 @@
 # Multi-stage Dockerfile for Examination Result Processing System (ERPS)
-# Stage 1: Build the application fat JAR
+# Stage 1: Build the application fat JAR with pre-compiled Vaadin bundle
 FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
+
+# Install Node.js 20 for Vaadin production frontend bundle compilation
+RUN apt-get update && apt-get install -y curl ca-certificates && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /build
 
 # Cache maven dependencies
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
-# Copy source code and build
+# Copy source code and build production fat JAR (compiles Flow bundle & stats.json)
 COPY src ./src
-RUN mvn clean package -DskipTests=true -B
+RUN mvn clean package -Pproduction -DskipTests=true -B
 
 # Stage 2: Minimal runtime image
 FROM eclipse-temurin:21-jre-jammy
