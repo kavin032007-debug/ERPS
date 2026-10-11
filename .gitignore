@@ -1,0 +1,48 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbnetstream/
+/nbproject/genfiles.properties
+
+### VS Code ###
+.vscode/
+
+### Vaadin ###
+node_modules/
+frontend/generated/
+src/main/bundles/
+.pnpm-store/
+package.json
+package-lock.json
+pnpm-lock.yaml
+webpack.config.js
+webpack.generated.js
+vite.config.ts
+vite.generated.ts
+types.d.ts
+tsconfig.json
+
+### Environment & Secrets ###
+.env
+*.log
