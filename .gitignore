@@ -44,5 +44,8 @@ types.d.ts
 tsconfig.json
 
 ### Environment & Secrets ###
-.env
+.env*
+.env.local
 *.log
+.neon
+.env.local
