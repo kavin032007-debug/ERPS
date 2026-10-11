@@ -35,4 +35,4 @@ ENV SPRING_PROFILES_ACTIVE=prod
 EXPOSE 8080
 
 # Run with container-aware JVM flags and dynamic PORT support
-ENTRYPOINT ["sh", "-c", "java -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -Dserver.port=${PORT:-8080} -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Xmx384m -XX:+UseG1GC -Dserver.port=${PORT:-8080} -jar app.jar"]
